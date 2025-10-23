@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zuzanna Klimas — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      /* Jasny fiolet + białe napisy */
+      --bg: linear-gradient(180deg, #9A8CFF 0%, #6A5BD6 100%);
+      --text: #ffffff;
+      --accent: #FFD700;
+      /* Panel nieco ciemniejszy fiolet dla kontrastu */
+      --panel: rgba(90, 76, 204, 0.92);
+      --panel-contrast: rgba(0,0,0,0.25);
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.65;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    h1, h2, h3{
+      font-family: 'Roboto Mono', monospace;
+      color: var(--accent);
+      margin: 0 0 0.5rem 0;
+      line-height: 1.2;
+    }
+    p{ margin: 0 0 1rem 0; }
+    a{
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover{ text-decoration: underline; }
+    img{
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* Hero */
+    .hero{
+      position: relative;
+      min-height: 100vh;
+      background: #000 url('hero-bg.jpg') center/cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .hero .overlay{
+      width: min(92%, 900px);
+      background: rgba(0,0,0,0.6);
+      padding: clamp(1.25rem, 3vw, 2.5rem);
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+      text-align: center;
+      backdrop-filter: saturate(120%) blur(2px);
+    }
+    .hero h1{
+      font-size: clamp(2rem, 6vw, 4rem);
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+    .hero h2{
+      font-size: clamp(1.05rem, 2.8vw, 1.6rem);
+      font-weight: 500;
+      opacity: 0.95;
+    }
+
+    /* Main content wrapper */
+    .content{
+      width: min(900px, 92%);
+      margin: 2rem auto 3rem auto;
+      background: var(--panel);
+      border-radius: 18px;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+      border: 1px solid var(--panel-contrast);
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+    }
+
+    section.section{
+      padding: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    section.section:last-child{
+      border-bottom: none;
+    }
+
+    .title{ margin-bottom: 1rem; }
+    .title h2{ margin-bottom: 0.35rem; }
+    .line{
+      width: 90px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Grid / two-column layouts */
+    .grid-2{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    /* Buttons */
+    .btn{
+      display: inline-block;
+      padding: 0.78rem 1.05rem;
+      background: var(--accent);
+      color: #141414; /* ciemny tekst na złotym dla czytelności */
+      font-weight: 700;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.2);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.25);
+      text-decoration: none;
+      filter: brightness(1.02);
+    }
+    .btn.secondary{
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn.small{
+      padding: 0.5rem 0.75rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      line-height: 1;
+    }
+    .btn[disabled]{
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .btn-wrap{
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .btn-center{
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* Reveal panel */
+    .reveal{
+      margin-top: 0.75rem;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .reveal pre{
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.98rem;
+      color: #fff;
+    }
+
+    /* Footer */
+    footer{
+      text-align: center;
+      color: #ffffff;
+      padding: 2rem 1rem 3rem;
+    }
+    footer .links{
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+    footer a{ font-weight: 600; }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .grid-2{ grid-template-columns: 1fr; }
+      .btn-wrap{ justify-content: center; }
+    }
+    @media (max-width: 600px){
+      .hero{ background-attachment: scroll; }
+      section.section{ padding: 1.5rem; }
+    }
+
+    /* Motion preferences */
+    @media (prefers-reduced-motion: reduce){
+      *{
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-label="Sekcja powitalna">
+    <div class="overlay">
+      <h1>Zuzanna Klimas</h1>
+      <h2>Game Designer</h2>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content" role="main">
+    <!-- Sekcja 1 -->
+    <section id="fenix" class="section" aria-labelledby="fenix-title">
+      <div class="title">
+        <h2 id="fenix-title">Mój Projekt: Uniwersum F.E.N.I.X.</h2>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <p>Grając w gry zawsze miałam hmm… może to zrobić inaczej? Zamiast zastanawiać się chciałam spróbować stworzyć swoje własne uniwersum. Tylko nie takie w mojej głowie czy na prywatnych notatkach. Coś, co sprawi, że ja oraz inne osoby nie będą mogły oderwać się od historii. Więc wymyśliłam uniwersum, które pierwotnie chce przelać na notatki, a gdy wszystko będzie idealne przeniosę do świata mojej własnej gry. Więc w międzyczasie gdy dopracowuje fabułę również uczę się podstaw programowania najpierw w 2d, a następnie w 3d. A poza samą fabułą chce też pobawić się światem przedstawionym. Bo czemu by nie stworzyć strony na której gracze będą mogli znaleźć specjalne informacje? Ułatwiające rozwiązanie zagadki. Albo miliona zadań pobocznych.</p>
+
+      <img src="fenix-login.png" alt="Zrzut ekranu logowania do projektu F.E.N.I.X." />
+
+      <p>Zamysł historii jest prosty, bo opisze zarazę, która mutuje ludzkie DNA. Tylko tu robi się ciekawiej, bo kto powiedział, że główny bohater będzie bohaterem. A tak szczerze chce stworzyć historię, która pozwoli graczowi decydować co chce osiągnąć. Chce zostać bohaterem? A proszę bardzo. A może jednak tym klasycznym złolem? No pewnie. Bo dla mnie nie jest najważniejsze, by stworzyć coś. Ja chce stworzyć moją perełkę gdzie ważną rolę odegra efekt motyla.</p>
+
+      <img src="mutacje.png" alt="Grafika koncepcyjna mutacji w uniwersum F.E.N.I.X." />
+
+ <table role="presentation" aria-label="Skróty">
+  <tr>
+    <td>
+      <a class="btn" href="https://interaktywna-strona-7una.bolt.host/" target="_blank" rel="noopener noreferrer" aria-label="Otwórz interaktywny prototyp w nowej karcie">
+        Interaktywny Prototyp
+      </a>
+    </td>
+    <td>
+      <a class="btn" href="https://www.canva.com/design/DAGwQ6t4jmU/7YAdFK_1rEQBdxNqw81rKA/view?utm_content=DAGwQ6t4jmU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h41cbecc46c" target="_blank" rel="noopener noreferrer" aria-label="Otwórz podpowiedzi do strony (Canva) w nowej karcie">
+        Podpowiedzi do strony
+      </a>
+    </td>
+    <td>
+  <details class="hint" style="position: relative; display: inline-block;">
+    <summary class="btn" aria-label="Pokaż odpowiedzi do strony">Odpowiedzi do strony</summary>
+    <div class="pop" role="note" aria-live="polite"
+         style="
+           position: absolute;
+           top: calc(100% + 8px);
+           left: 0;                /* jeśli wolisz wyrównać do prawej: zamień na 'right: 0' i usuń 'left' */
+           z-index: 9999;
+           background: #111;
+           color: #fff;
+           border: 1px solid #333;
+           border-radius: 8px;
+           padding: 12px 14px;
+           box-shadow: 0 8px 24px rgba(0,0,0,.2);
+           max-width: min(90vw, 520px);
+           min-width: 260px;
+           white-space: normal;
+         ">
+      <h4 style="margin: 0 0 8px; font-size: 1rem; font-weight: 600;">Dane dostępowe i wskazówki</h4>
+      <div style="margin: 4px 0;"><b>Login:</b> Victor_Noctar</div>
+      <div style="margin: 4px 0;"><b>Hasło:</b> W4terzwijn</div>
+      <div style="margin: 4px 0;"><b>Przykładowy ukryty raport:</b> 5483</div>
+      <div style="margin: 4px 0;"><b>Ukryta podstrona (dodatek):</b> K3Y4P</div>
+    </div>
+  </details>
+<td>
+      <a class="btn" href="https://mufibka.github.io/Demo-portfolio-ZK/" target="_blank" rel="noopener noreferrer" aria-label="Otwórz krótką historyjkę w nowej karcie">
+        Krótka Historyjka
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+    <!-- Sekcja 2 -->
+    <section id="gamedesign" class="section" aria-labelledby="gamedesign-title">
+      <div class="title">
+        <h2 id="gamedesign-title">Analiza i Pomysły</h2>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <p>Wiele pomysłów przepływa przez moją głowę. Czasem nad niektórymi zatrzymam się i zacznę analizować czy miałyby sens. A poznając nowe uniwersa czasem mam uczucie, że został zmarnowany pomysł. Więc czemu może kiedyś tych pomysłów nie rozwinąć. Jednym z pomysłów, który pojawił się w mojej głowie należy do gry far cry 5. Bo czuje straszne zawiedzenie po przejściu tej gry. Bo jak to jest, że w far cry 4 dali dwie strony, które możemy wesprzeć a w 5 jedynie możemy wybierać między ucieczką lub kontynuacją walki z kultem? Więc myśląc doszłam do wniosku, że można by było stworzyć grę gdzie właśnie jako gracz możemy na początku podjąć decyzje czy chcemy zacząć jako członek rządu dyktatury lub jako zwykły cywil gdzie będzie można dalej podjąć decyzje, czy chcemy trzymać się naszej grupy, czy wręcz przeciwnie. Zdradzić ich i wykorzystać informacje przeciwko danej grupy.</p>
+    </section>
+
+    <!-- Sekcja 3 -->
+    <section id="dev1" class="section" aria-labelledby="dev1-title">
+      <div class="title">
+        <h2 id="dev1-title">Pierwsza Gra</h2>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <img src="gra-pixel.png" alt="Zrzut ekranu z pierwszej prostej gry w stylu pixel art" />
+        </div>
+        <div>
+          <p>Pierwsza gra… była. Jednak nie zrobiłam ją by była jakkolwiek rozbudowana. To był jedynie test dla mnie czy spodoba mi się to. I wiecie co? Mimo że czasem chciałam wyrzucić laptopa to wracałam po kilku minutach i naprawiałam błąd. Podsumowując dzięki tej niby głupiej bardzo krótkiej gierce poczułam, że a może rozbudować to? Pobawić się na dłuższy czas. Bo możliwość połączenia zainteresowania pisaniem jakichś opowiadań z zabawą z programowaniem. Brzmi idealnie.</p>
+        </div>
+      </div>
+
+      <div class="btn-center">
+        <a class="btn" href="https://teal-gecko-d3aaef.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Otwórz szybki test w nowej karcie">Szybki test</a>
+      </div>
+    </section>
+
+    <!-- Sekcja 4 -->
+    <section id="narrative" class="section" aria-labelledby="narrative-title">
+      <div class="title">
+        <h2 id="narrative-title">Doświadczenie w Pisaniu</h2>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <p>W samym pisaniu mam już długie doświadczenie, bo w wieku ok. 12 lat zaczęłam pisać pierwsze krótkie opowiadania na moich prywatnych notatkach. Natomiast w wieku 15 lat napisałam swoją pierwszą historię, która we wrześniu tego roku osiągnęła 100 tysięcy wyświetleń. A co dla mnie najmilsze to każdego dnia od kilku lat dzień w dzień moja historia jest czytana. Nie było dnia by nikt nie czytał chociaż jednego rozdziału.</p>
+
+      <div class="btn-center">
+        <a class="btn" href="https://1drv.ms/w/c/8a748e6994330eb3/ERUDOOCbuUpJpEm5x0KbwfsBEtama_iYV26p-vrU47x_CA?e=YI4Px0" target="_blank" rel="noopener noreferrer" aria-label="Przeczytaj fragment historii w nowej karcie">Krótki fragment</a>
+      </div>
+    </section>
+
+    <!-- Sekcja 5 -->
+    <section id="dev2" class="section" aria-labelledby="dev2-title">
+      <div class="title">
+        <h2 id="dev2-title">Druga Gra</h2>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <img src="gra-topdown.png" alt="Zrzut ekranu z drugiej gry typu top-down" />
+        </div>
+        <div>
+          <p>Druga gra wciąż służy jako moje pole testowe nowych opcji. Dzięki niej odkryłam masę fajnych dodatków, które będę mogła przenieść na swój ostateczny projekt, czyli moja gra w 3d według mojego uniwersum. No i przy okazji nauczyłam się, by mimo kolejnego błędu nie podawać się oraz by na spokojnie do tego podejść.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sekcja 6 -->
+    <section id="summary" class="section" aria-labelledby="summary-title">
+      <div class="title">
+        <h2 id="summary-title">Moja tajna broń</h2>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <p>Na podsumowanie. Uniwersum, nad którym zaczynam prace ma wątki militarne a co ważniejsze dla fabuły należę do osób, które znają się na tym, wiadomo, nie wszystko. Jednak wiedza uzyskana w liceum pomaga połączyć wymyślony świat z realiami. Bo raczej mało kto ma prawdziwe doświadczenie z taktykami policyjnymi, wojskowymi czy CQB albo strukturą broni, czy taktyk linowych. Lub mieć zajęcia, na których analizowało się sprawy kryminalne, skupiając się na motywacji kryminalistów, a następnie na wymyśleniu przestępcy z całą historią i jego psychologią.</p>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+
+
+  <script>
+    // Aktualny rok w stopce
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Rozwijany panel "Odpowiedzi do strony"
+    (function(){
+      const btn = document.getElementById('answersToggle');
+      const panel = document.getElementById('answersPanel');
+      if (!btn || !panel) return;
+
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        panel.hidden = expanded;
+      });
+    })();
+  </script>
+</body>
+</html>
