@@ -245,51 +245,105 @@
 
       <img src="mutacje.png" alt="Grafika koncepcyjna mutacji w uniwersum F.E.N.I.X." />
 
- <table role="presentation" aria-label="Skróty">
-  <tr>
-    <td>
-      <a class="btn" href="https://interaktywna-strona-7una.bolt.host/" target="_blank" rel="noopener noreferrer" aria-label="Otwórz interaktywny prototyp w nowej karcie">
-        Interaktywny Prototyp
-      </a>
-    </td>
-    <td>
-      <a class="btn" href="https://www.canva.com/design/DAGwQ6t4jmU/7YAdFK_1rEQBdxNqw81rKA/view?utm_content=DAGwQ6t4jmU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h41cbecc46c" target="_blank" rel="noopener noreferrer" aria-label="Otwórz podpowiedzi do strony (Canva) w nowej karcie">
-        Podpowiedzi do strony
-      </a>
-    </td>
-    <td>
-  <details class="hint" style="position: relative; display: inline-block;">
-    <summary class="btn" aria-label="Pokaż odpowiedzi do strony">Odpowiedzi do strony</summary>
-    <div class="pop" role="note" aria-live="polite"
-         style="
-           position: absolute;
-           top: calc(100% + 8px);
-           left: 0;                /* jeśli wolisz wyrównać do prawej: zamień na 'right: 0' i usuń 'left' */
-           z-index: 9999;
-           background: #111;
-           color: #fff;
-           border: 1px solid #333;
-           border-radius: 8px;
-           padding: 12px 14px;
-           box-shadow: 0 8px 24px rgba(0,0,0,.2);
-           max-width: min(90vw, 520px);
-           min-width: 260px;
-           white-space: normal;
-         ">
-      <h4 style="margin: 0 0 8px; font-size: 1rem; font-weight: 600;">Dane dostępowe i wskazówki</h4>
-      <div style="margin: 4px 0;"><b>Login:</b> Victor_Noctar</div>
-      <div style="margin: 4px 0;"><b>Hasło:</b> W4terzwijn</div>
-      <div style="margin: 4px 0;"><b>Przykładowy ukryty raport:</b> 5483</div>
-      <div style="margin: 4px 0;"><b>Ukryta podstrona (dodatek):</b> K3Y4P</div>
-    </div>
-  </details>
-<td>
-      <a class="btn" href="https://zuzanna-klimas.github.io/Demo-portfolio-ZK/" target="_blank" rel="noopener noreferrer" aria-label="Otwórz krótką historyjkę w nowej karcie">
-        Krótka Historyjka
-      </a>
-    </td>
-  </tr>
-</table>
+ <div class="skroty" role="region" aria-label="Skróty — przewijaj w bok">
+  <table role="presentation" aria-label="Skróty">
+    <tr>
+      <td>
+        <a class="btn" href="https://interaktywna-strona-7una.bolt.host/" target="_blank" rel="noopener noreferrer">
+          Interaktywny Prototyp
+        </a>
+      </td>
+      <td>
+        <a class="btn" href="https://www.canva.com/design/DAGwQ6t4jmU/7YAdFK_1rEQBdxNqw81rKA/view" target="_blank" rel="noopener noreferrer">
+          Podpowiedzi do strony
+        </a>
+      </td>
+      <td>
+        <details class="hint">
+          <summary class="btn" aria-label="Pokaż odpowiedzi do strony">Odpowiedzi do strony</summary>
+          <div class="pop">
+            <h4>Dane dostępowe i wskazówki</h4>
+            <div><b>Login:</b> Victor_Noctar</div>
+            <div><b>Hasło:</b> W4terzwijn</div>
+            <div><b>Przykładowy ukryty raport:</b> 5483</div>
+            <div><b>Ukryta podstrona (dodatek):</b> K3Y4P</div>
+          </div>
+        </details>
+      </td>
+      <td>
+        <a class="btn" href="https://zuzanna-klimas.github.io/Demo-portfolio-ZK/" target="_blank" rel="noopener noreferrer">
+          Krótka Historyjka
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<style>
+.skroty {
+  padding: 4px 0;
+  margin: 4px 0;
+}
+
+.skroty table {
+  display: inline-table;
+  border-collapse: separate;
+  border-spacing: 8px 0;
+}
+
+/* Domyślnie – brak przewijania na dużych ekranach */
+.skroty {
+  overflow-x: visible;
+}
+
+/* Tylko na telefonach – przewijanie poziome */
+@media (max-width: 768px) {
+  .skroty {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* --- Naprawa problemu z "details" --- */
+.hint {
+  position: relative; /* tworzy kontekst dla absolutnego menu */
+  display: inline-block;
+}
+
+.hint .pop {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 9999;
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  max-width: min(92vw, 520px);
+  min-width: 260px;
+  max-height: min(60vh, 380px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: normal;
+
+  /* >>> KLUCZOWE <<< */
+  display: none; /* ukryte domyślnie */
+}
+
+/* Pokazuj tylko gdy <details> jest otwarte */
+.hint[open] .pop {
+  display: block;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Mała animacja wejścia (opcjonalna) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 
 
     <!-- Sekcja 2 -->
